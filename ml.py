@@ -9,21 +9,18 @@ import pandas as pd
 import numpy as np
 import mlflow
 import subprocess
-
-MODEL_PATH = 'C:/Users/Juncheng/Documents/NUS/CEG/Y2S2/Trane Application Engineer IA/automl_trane_model'
-
 '''
 Inputs are based on the model signature found in MLmodel file
 Provide a dict of param-value pairs, taking note of data type required and name of each parameter
 '''
-inputs = {"CurrTime5Value": np.float32(1.0), "CurrTime4Value": np.float32(2.0), "CurrTime2Value": np.float32(3.0), "CurrTime1Value": np.float32(4.0)}
-
+# inputs = {"CurrTime5Value": np.float32(1.0), "CurrTime4Value": np.float32(2.0), "CurrTime2Value": np.float32(3.0), "CurrTime1Value": np.float32(4.0)}
 '''
 Runs the shell command to install all necessary requirements needed by the packaged model before proceeding
 '''
 # dependecies_path = mlflow.pyfunc.get_model_dependencies(MODEL_PATH, format='pip')
 # subprocess.run([f"pip install -r '{MODEL_PATH}/requirements.txt'"], shell=True)
 
-model = mlflow.pyfunc.load_model(MODEL_PATH)
-predictions = model.predict(inputs)
-print(predictions)
+def runMlPrediction(MODEL_PATH, inputs):
+    model = mlflow.pyfunc.load_model(MODEL_PATH)
+    predictions = model.predict(inputs)
+    print(predictions)
